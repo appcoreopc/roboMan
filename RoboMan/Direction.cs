@@ -1,7 +1,7 @@
 ﻿
 namespace RoboMan
 {
-    enum Direction
+    enum MovementType
     {
         Left = 1, 
         Right = -1

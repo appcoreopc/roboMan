@@ -1,39 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using RoboMan.Movement;
+using System;
 
 namespace RoboMan
 {
-    class Roboman : IRobo
+    class Roboman : IRobot
     {
+        private FaceDirection _facingDirection;
+
+        private IMovementMechanics _movementMechanics;
+        /// <summary>
+        /// Park logic into the constructor 
+        /// </summary>
+        /// <param name="tableSize"></param>
+        public Roboman(IMovementMechanics movementMechanics)
+        {
+            _movementMechanics = movementMechanics;
+        }
+
         public bool Left()
         {
-            throw new NotImplementedException();
+            return _movementMechanics.ChangeDirection(MovementType.Left);
         }
 
         public bool Move()
         {
-            throw new NotImplementedException();
+            return _movementMechanics.Move();
         }
 
-        public bool Place(int x, int y, FaceDirection facingDirection)
+        public bool ChangeDirection(MovementType movement)
         {
-            throw new NotImplementedException();
+            return _movementMechanics.ChangeDirection(movement);
         }
 
-        public string ReportStatus()
+        public bool SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection)
         {
-            throw new NotImplementedException();
+            return _movementMechanics.SetPositionOnBoard(placementX, placementY, facingDirection);
         }
 
         public bool Right()
         {
-            throw new NotImplementedException();
+            return _movementMechanics.ChangeDirection(MovementType.Right);
         }
 
-        public bool Turn(Direction direction)
+        public string ReportStatus()
         {
-            throw new NotImplementedException();
+            return _movementMechanics.ReportStatus();
         }
+        
     }
 }

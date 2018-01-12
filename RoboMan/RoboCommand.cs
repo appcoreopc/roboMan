@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace RoboMan
 {
 
@@ -10,9 +7,9 @@ namespace RoboMan
     /// </summary>
     class RoboCommand
     {
+        private IRobot _robo;
 
-        private IRobo _robo;
-        public RoboCommand(IRobo robo)
+        public RoboCommand(IRobot robo)
         {
             _robo = robo;
         }
