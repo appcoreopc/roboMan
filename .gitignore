@@ -1,0 +1,5 @@
+RoboMan/obj/*
+RoboMan/bin/*
+RoboManTest/bin/*
+RoboManTest/obj/*
+.vs/RoboMan/v15/sqlite3/storage.ide
