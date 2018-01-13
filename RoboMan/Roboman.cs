@@ -7,44 +7,44 @@ namespace RoboMan
     {
         private FaceDirection _facingDirection;
 
-        private IMovementMechanics _movementMechanics;
+        private IBoardRules _board;
         /// <summary>
-        /// Park logic into the constructor 
+        /// Park logic into the constructor     
         /// </summary>
         /// <param name="tableSize"></param>
-        public Roboman(IMovementMechanics movementMechanics)
+        public Roboman(IBoardRules board)
         {
-            _movementMechanics = movementMechanics;
+            _board = board;
         }
 
         public bool Left()
         {
-            return _movementMechanics.ChangeDirection(MovementType.Left);
+            return _board.ChangeDirection(MovementType.Left);
         }
 
         public bool Move()
         {
-            return _movementMechanics.Move();
+            return _board.Move();
         }
 
         public bool ChangeDirection(MovementType movement)
         {
-            return _movementMechanics.ChangeDirection(movement);
+            return _board.ChangeDirection(movement);
         }
 
         public bool SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection)
         {
-            return _movementMechanics.SetPositionOnBoard(placementX, placementY, facingDirection);
+            return _board.SetPositionOnBoard(placementX, placementY, facingDirection);
         }
 
         public bool Right()
         {
-            return _movementMechanics.ChangeDirection(MovementType.Right);
+            return _board.ChangeDirection(MovementType.Right);
         }
 
         public string ReportStatus()
         {
-            return _movementMechanics.ReportStatus();
+            return _board.ReportStatus();
         }
         
     }

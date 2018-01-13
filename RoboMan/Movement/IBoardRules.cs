@@ -1,7 +1,7 @@
 ﻿
 namespace RoboMan.Movement
 {
-    interface IMovementMechanics
+    interface IBoardRules
     {
         bool Move();
 

@@ -4,16 +4,16 @@ using System.Text;
 
 namespace RoboMan.Movement
 {
-    class RobotMovementMechanics : IMovementMechanics
+    class Simple5x5Board : IBoardRules
     {
         private int? _locationX;
         private int? _locationY;
         private int _tableSize;
         private FaceDirection _facingDirection;
 
-        public RobotMovementMechanics(int tableSize)
+        public Simple5x5Board(int tableSize)
         {
-            _tableSize = tableSize;
+            this._tableSize = tableSize;
         }
 
         public bool Left()

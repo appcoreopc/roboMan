@@ -1,4 +1,6 @@
 ﻿
+using RoboMan.Parser;
+
 namespace RoboMan
 {
 
@@ -12,6 +14,11 @@ namespace RoboMan
         public RoboCommand(IRobot robo)
         {
             _robo = robo;
+        }
+
+        public void ExecuteCommand(string command)
+        {
+
         }
 
     }
