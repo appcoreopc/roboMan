@@ -16,7 +16,7 @@ namespace RoboMan
                 var instructions = GetUserInstruction();
                 if (instructions?.ToLower() != "exit")
                 {
-                    command.ExecuteCommand(instructions);
+                    command.ExecuteCommand(instructions.Split());
                 }
             }
         }
