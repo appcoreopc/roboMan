@@ -1,5 +1,4 @@
-﻿
-namespace RoboMan.Movement
+﻿namespace RoboMan.Movement
 {
     class Simple5x5Board : IBoardRules
     {
@@ -13,12 +12,13 @@ namespace RoboMan.Movement
             this._tableSize = tableSize;
         }
 
-        public bool Left()
+        public MovementActionResult Left()
         {
-            return ChangeDirection(MovementType.Left);
+            var turnStatus = ChangeDirection(MovementType.Left);
+            return turnStatus == true ? new MovementActionResult(MovementStatus.LeftTurnOk) : new MovementActionResult(MovementStatus.LeftTurnFail);
         }
 
-        public bool Move()
+        public MovementActionResult Move()
         {
             if (IsRobotPlacedOnTheBoard())
             {
@@ -29,10 +29,10 @@ namespace RoboMan.Movement
                 {
                     _locationX = xNewPosition;
                     _locationY = yNewPosition;
-                    return true;
+                    return new MovementActionResult(MovementStatus.MoveOk);
                 }
             }
-            return false;
+            return new MovementActionResult(MovementStatus.UnableToMoveToTargetLocation);
         }
 
         public bool ChangeDirection(MovementType movement)
@@ -55,30 +55,41 @@ namespace RoboMan.Movement
             return false;
         }
 
-        public bool SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection)
+        public MovementActionResult SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection)
         {
             if (IsLocationWithinBoard(placementX, placementY))
             {
                 _locationX = placementX;
                 _locationY = placementY;
                 _facingDirection = facingDirection;
-                return true;
+                return new MovementActionResult(MovementStatus.RobotPlacementSuccessful);
             }
-            return false;
+            else if (placementX > _tableSize - 1)
+                return new MovementActionResult(MovementStatus.MoveXOutOfBoardMaxSize);
+            else if (placementX < 0)
+                return new MovementActionResult(MovementStatus.MoveXOutOfBoardMinSize);
+            else if (placementY > _tableSize - 1)
+                return new MovementActionResult(MovementStatus.MoveYOutOfBoardMaxSize);
+            else if (placementY < 0)
+                return new MovementActionResult(MovementStatus.MoveYOutOfBoardMinSize);
+
+            return new MovementActionResult(MovementStatus.MoveCannotBeDetermined);
         }
 
-        public bool Right()
+        public MovementActionResult Right()
         {
-            return ChangeDirection(MovementType.Right);
+            var rightTurnResult = ChangeDirection(MovementType.Right);
+            return rightTurnResult == true ? new MovementActionResult(MovementStatus.RightTurnOk) : new MovementActionResult(MovementStatus.RightTurnFail);
         }
 
-        public string ReportStatus()
+        public MovementActionResult ReportStatus()
         {
             if (IsRobotPlacedOnTheBoard())
             {
-                return "";
+                return new MovementActionResult(_locationX, _locationY,
+                    _facingDirection, MovementStatus.RobotPlacementSuccessful);
             }
-            return string.Empty;
+            return new MovementActionResult(MovementStatus.RobotNotPlaced);
         }
 
         private bool IsLocationWithinBoard(int x, int y)

@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using RoboMan.Movement;
 using RoboMan.Parser;
 using RoboMan.Util;
 
@@ -62,20 +63,22 @@ namespace RoboMan
         public void ExecuteCommand(string[] command)
         {
 
-            var actionResult = CommandLine.Parser.Default.ParseArguments<PlaceOptions, MoveOptions, LeftOptions, RightOptions, ReportOptions>(command)
-           .MapResult(
+            var actionResult = CommandLine.Parser.Default.ParseArguments<PlaceOptions, MoveOptions, 
+                LeftOptions, RightOptions, ReportOptions>(command)
+           
+                .MapResult(
 
-                (PlaceOptions opts) => PlaceRobot(opts),
+                    (PlaceOptions opts) => PlaceRobot(opts),
 
-                (MoveOptions opts) => Move(opts),
+                    (MoveOptions opts) => Move(opts),
 
-                (LeftOptions opts) => TurnLeft(opts),
+                    (LeftOptions opts) => TurnLeft(opts),
 
-                (RightOptions opts) => TurnRight(opts),
+                    (RightOptions opts) => TurnRight(opts),
 
-                (ReportOptions opts) => ReportStatus(opts),
+                    (ReportOptions opts) => ReportStatus(opts),
 
-                errs => 1);
+                    errs => 1);
         }
 
         private object PlaceRobot(PlaceOptions opts)
@@ -83,21 +86,20 @@ namespace RoboMan
             var placementActionResult = GetPlacementDirection(opts.PlacementCommandArgument);
             if (placementActionResult != null)
             {
-                _robo.SetPositionOnBoard(placementActionResult.LocationX, placementActionResult.LocationY,
+                return _robo.SetPositionOnBoard(placementActionResult.LocationX, placementActionResult.LocationY,
                     placementActionResult.Direction);
-                return true;
             }
-            return false;
+            return new MovementActionResult(MovementStatus.RobotPlaceInvalidCommandParsed);
         }
 
-        private PlaceInstruction GetPlacementDirection(string placementCommandArgument)
+        private ParsedPositionInstruction GetPlacementDirection(string placementCommandArgument)
         {
             if (!string.IsNullOrEmpty(placementCommandArgument))
             {
                 var result = placementCommandArgument?.Split(Appconstant.PlaceInstructionSeparator);
                 if (result.Length == 3)
                 {
-                    return new PlaceInstruction
+                    return new ParsedPositionInstruction
                     {
                         LocationX = result[0].ToInt() ?? 0,
                         LocationY = result[1].ToInt() ?? 0,
@@ -110,7 +112,8 @@ namespace RoboMan
 
         private object ReportStatus(ReportOptions opts)
         {
-            return _robo.ReportStatus();
+            var statusReport = _robo.ReportStatus();
+            return statusReport; 
         }
 
         private object TurnRight(RightOptions opts)

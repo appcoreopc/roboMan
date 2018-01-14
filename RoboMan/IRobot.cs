@@ -1,18 +1,20 @@
-﻿namespace RoboMan
+﻿using RoboMan.Movement;
+
+namespace RoboMan
 {
     internal interface IRobot
     {
-        bool Move();
+        MovementActionResult Move();
 
         bool Left();
 
         bool Right();
 
-        bool ChangeDirection(MovementType direction);
+        //bool ChangeDirection(MovementType direction);
 
-        string ReportStatus();
+        MovementActionResult ReportStatus();
 
-        bool SetPositionOnBoard(int x, int y, FaceDirection facingDirection);
+        MovementActionResult SetPositionOnBoard(int x, int y, FaceDirection facingDirection);
 
     }
 

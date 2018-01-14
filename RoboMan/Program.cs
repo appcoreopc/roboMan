@@ -7,14 +7,15 @@ namespace RoboMan
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Welome to Robo World !");
+
             var robot = new Roboman(new Simple5x5Board(5));
             var command = new RoboCommand(robot);
 
             while (true)
             {
                 var instructions = GetUserInstruction();
-                if (instructions?.ToLower() != "exit")
+                if (instructions?.ToLower() != Appconstant.AppExitCommandString)
                 {
                     command.ExecuteCommand(instructions.Split());
                 }
@@ -23,7 +24,7 @@ namespace RoboMan
 
         private static string GetUserInstruction()
         {
-            Console.WriteLine("#:");
+            Console.Write("#:");
             return Console.ReadLine();
         }
     }

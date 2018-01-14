@@ -3,17 +3,17 @@ namespace RoboMan.Movement
 {
     interface IBoardRules
     {
-        bool Move();
+        MovementActionResult Move();
 
-        bool Left();
+        MovementActionResult Left();
 
-        bool Right();
+        MovementActionResult Right();
 
         bool ChangeDirection(MovementType direction);
 
-        string ReportStatus();
+        MovementActionResult ReportStatus();
 
-        bool SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection);
+        MovementActionResult SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection);
 
     }
 }

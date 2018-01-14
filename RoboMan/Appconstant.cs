@@ -9,5 +9,8 @@ namespace RoboMan
         public const int Size = 5;
 
         public const char PlaceInstructionSeparator = ',';
+
+
+        public const string AppExitCommandString = "exit";
     }
 }

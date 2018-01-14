@@ -1,12 +1,9 @@
 ﻿using RoboMan.Movement;
-using System;
 
 namespace RoboMan
 {
     class Roboman : IRobot
     {
-        private FaceDirection _facingDirection;
-
         private IBoardRules _board;
         /// <summary>
         /// Park logic into the constructor     
@@ -15,24 +12,19 @@ namespace RoboMan
         public Roboman(IBoardRules board)
         {
             _board = board;
-        }
+        } 
 
         public bool Left()
         {
             return _board.ChangeDirection(MovementType.Left);
         }
 
-        public bool Move()
+        public MovementActionResult Move()
         {
             return _board.Move();
         }
-
-        public bool ChangeDirection(MovementType movement)
-        {
-            return _board.ChangeDirection(movement);
-        }
-
-        public bool SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection)
+        
+        public MovementActionResult SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection)
         {
             return _board.SetPositionOnBoard(placementX, placementY, facingDirection);
         }
@@ -42,10 +34,15 @@ namespace RoboMan
             return _board.ChangeDirection(MovementType.Right);
         }
 
-        public string ReportStatus()
+        public MovementActionResult ReportStatus()
         {
             return _board.ReportStatus();
         }
-        
+
+        private bool ChangeDirection(MovementType movement)
+        {
+            return _board.ChangeDirection(movement);
+        }
+
     }
 }
