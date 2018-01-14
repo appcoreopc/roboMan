@@ -108,7 +108,7 @@
 
             if (_facingDirection == FaceDirection.West)
                 return _locationX.Value - 1;
-            else if (_facingDirection == FaceDirection.North)
+            else if (_facingDirection == FaceDirection.East)
                 return _locationX.Value + 1;
             else
                 return _locationX.Value;

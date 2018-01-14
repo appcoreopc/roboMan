@@ -7,6 +7,7 @@ namespace RoboManTest
     [TestClass]
     public class RobotManTest
     {
+
         private IBoardRules _board;
         private Roboman _roboman;
 
@@ -111,6 +112,61 @@ namespace RoboManTest
 
             Assert.IsTrue(currentDirection.Direction == FaceDirection.North);
         }
+
+        [TestMethod]
+        public void XAxisMovementTest()
+        {
+            var result = _roboman.SetPositionOnBoard(3, 0, FaceDirection.East);
+            
+            var validMovementResult = _roboman.Move();
+
+            var outOfXAxisMovementResult = _roboman.Move();
+
+            Assert.IsTrue(validMovementResult.Status == MovementStatus.MoveOk);
+
+            Assert.IsTrue(outOfXAxisMovementResult.Status == MovementStatus.UnableToMoveToTargetLocation);
+
+        }
+        
+
+        [TestMethod]
+        public void XAxisMovementToWestDirectionOutOfArea()
+        {
+            var result = _roboman.SetPositionOnBoard(3, 1, FaceDirection.East);
+
+            _roboman.Right();
+
+            _roboman.Right();
+
+            var testDirectionResult = _roboman.ReportStatus();
+            
+            Assert.IsTrue(testDirectionResult.Direction == FaceDirection.West);
+
+            _roboman.Move();
+
+            _roboman.Move();
+
+            var expectedMovementValidResult = _roboman.Move();
+
+            Assert.IsTrue(expectedMovementValidResult.Status == MovementStatus.MoveOk);
+
+            var expectedInValidResult = _roboman.Move();
+
+            Assert.IsTrue(expectedInValidResult.Status == MovementStatus.UnableToMoveToTargetLocation);
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+
 
 
 
