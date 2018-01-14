@@ -1,4 +1,6 @@
 ﻿using CommandLine;
+using RoboMan.Parser;
+using RoboMan.Util;
 
 namespace RoboMan
 {
@@ -60,7 +62,7 @@ namespace RoboMan
         public void ExecuteCommand(string[] command)
         {
 
-            var x = CommandLine.Parser.Default.ParseArguments<PlaceOptions, MoveOptions, LeftOptions, RightOptions, ReportOptions>(command)
+            var actionResult = CommandLine.Parser.Default.ParseArguments<PlaceOptions, MoveOptions, LeftOptions, RightOptions, ReportOptions>(command)
            .MapResult(
 
                 (PlaceOptions opts) => PlaceRobot(opts),
@@ -78,14 +80,32 @@ namespace RoboMan
 
         private object PlaceRobot(PlaceOptions opts)
         {
-            if (GetPlacementDirection(opts.PlacementCommandArgument))
+            var placementActionResult = GetPlacementDirection(opts.PlacementCommandArgument);
+            if (placementActionResult != null)
+            {
+                _robo.SetPositionOnBoard(placementActionResult.LocationX, placementActionResult.LocationY,
+                    placementActionResult.Direction);
                 return true;
+            }
             return false;
         }
 
-        private bool GetPlacementDirection(string placementCommandArgument)
+        private PlaceInstruction GetPlacementDirection(string placementCommandArgument)
         {
-            return true;
+            if (!string.IsNullOrEmpty(placementCommandArgument))
+            {
+                var result = placementCommandArgument?.Split(Appconstant.PlaceInstructionSeparator);
+                if (result.Length == 3)
+                {
+                    return new PlaceInstruction
+                    {
+                        LocationX = result[0].ToInt() ?? 0,
+                        LocationY = result[1].ToInt() ?? 0,
+                        Direction = result[2].ToDirection() ?? FaceDirection.North
+                    };
+                }
+            }
+            return null;
         }
 
         private object ReportStatus(ReportOptions opts)

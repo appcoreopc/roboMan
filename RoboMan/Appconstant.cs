@@ -6,6 +6,8 @@ namespace RoboMan
 {
     class Appconstant
     {
-        public const int Size = 5;      
+        public const int Size = 5;
+
+        public const char PlaceInstructionSeparator = ',';
     }
 }

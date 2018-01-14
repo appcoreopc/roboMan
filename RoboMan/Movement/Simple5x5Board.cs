@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace RoboMan.Movement
 {
     class Simple5x5Board : IBoardRules
@@ -86,7 +83,7 @@ namespace RoboMan.Movement
 
         private bool IsLocationWithinBoard(int x, int y)
         {
-            return (x > 0 || y > 0 || x >= _tableSize && y >= _tableSize);
+            return (x >= 0 && y >= 0 && x <= _tableSize - 1 && y <= _tableSize - 1);
         }
 
         private bool IsRobotPlacedOnTheBoard()
@@ -96,14 +93,28 @@ namespace RoboMan.Movement
 
         private int GetXMoved()
         {
-            return _facingDirection == FaceDirection.West ? _locationX.Value - 1
-                : _facingDirection == FaceDirection.East ? _locationX.Value + 1 : _locationX.Value;
+            //return _facingDirection == FaceDirection.West ? _locationX.Value - 1
+            //    : _facingDirection == FaceDirection.East ? _locationX.Value + 1 : _locationX.Value;
+
+            if (_facingDirection == FaceDirection.West)
+                return _locationX.Value - 1;
+            else if (_facingDirection == FaceDirection.North)
+                return _locationX.Value + 1;
+            else
+                return _locationX.Value;
         }
 
         private int GetYMoved()
         {
-            return _facingDirection == FaceDirection.South ? _locationY.Value - 1
-                : _facingDirection == FaceDirection.North ? _locationX.Value + 1 : _locationX.Value;
+            if (_facingDirection == FaceDirection.South)
+                return _locationY.Value - 1;
+            else if (_facingDirection == FaceDirection.North)
+                return _locationY.Value + 1;
+            else
+                return _locationY.Value;
+
+            //return _facingDirection == FaceDirection.South ? _locationY.Value - 1
+            //    : _facingDirection == FaceDirection.North ? _locationY.Value + 1 : _locationY.Value;
         }
     }
 }
