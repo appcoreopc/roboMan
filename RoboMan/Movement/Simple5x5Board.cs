@@ -52,8 +52,8 @@
 
                 _facingDirection = (FaceDirection)currentRobotFacingDirection;
 
-                return movement == MovementType.Left ? new MovementActionResult(MovementStatus.LeftTurnOk) :
-                    new MovementActionResult(MovementStatus.RightTurnOk);
+                return movement == MovementType.Left ? new MovementActionResult(MovementStatus.TurnLeftSuccessful) :
+                    new MovementActionResult(MovementStatus.TurnRightSuccessful);
             }
             return new MovementActionResult(MovementStatus.ChangeDirectionFailed);
         }

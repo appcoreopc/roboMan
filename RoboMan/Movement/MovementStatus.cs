@@ -24,13 +24,7 @@ namespace RoboMan.Movement
         MoveYOutOfBoardMinSize,
 
         MoveCannotBeDetermined,
-
-        LeftTurnOk,
-        LeftTurnFail,
-
-        RightTurnOk,
-        RightTurnFail,
-
+         
         ChangeDirectionOk,
         ChangeDirectionFailed,
 
