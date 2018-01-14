@@ -14,8 +14,7 @@
 
         public MovementActionResult Left()
         {
-            var turnStatus = ChangeDirection(MovementType.Left);
-            return turnStatus == true ? new MovementActionResult(MovementStatus.LeftTurnOk) : new MovementActionResult(MovementStatus.LeftTurnFail);
+            return ChangeDirection(MovementType.Left);
         }
 
         public MovementActionResult Move()
@@ -35,7 +34,7 @@
             return new MovementActionResult(MovementStatus.UnableToMoveToTargetLocation);
         }
 
-        public bool ChangeDirection(MovementType movement)
+        public MovementActionResult ChangeDirection(MovementType movement)
         {
             if (IsRobotPlacedOnTheBoard())
             {
@@ -48,11 +47,12 @@
                 if (currentRobotFacingDirection == 0)
                     currentRobotFacingDirection = (int)FaceDirection.West;
 
-                _facingDirection = (FaceDirection)currentRobotFacingDirection;
+                _facingDirection = (FaceDirection) currentRobotFacingDirection;
 
-                return true;
+                return movement == MovementType.Left ? new MovementActionResult(MovementStatus.LeftTurnOk) : 
+                    new MovementActionResult(MovementStatus.RightTurnOk);
             }
-            return false;
+            return new MovementActionResult(MovementStatus.ChangeDirectionFailed);
         }
 
         public MovementActionResult SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection)
@@ -78,8 +78,7 @@
 
         public MovementActionResult Right()
         {
-            var rightTurnResult = ChangeDirection(MovementType.Right);
-            return rightTurnResult == true ? new MovementActionResult(MovementStatus.RightTurnOk) : new MovementActionResult(MovementStatus.RightTurnFail);
+            return ChangeDirection(MovementType.Right);
         }
 
         public MovementActionResult ReportStatus()

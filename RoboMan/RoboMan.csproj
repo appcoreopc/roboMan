@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Parser\Options.cs" />
+    <Compile Remove="Command\Options.cs" />
+    <Compile Remove="Command\PlaceInstruction.cs" />
     <Compile Remove="RobotMovementMechanics.cs" />
     <Compile Remove="StatusReport.cs" />
   </ItemGroup>

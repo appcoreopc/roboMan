@@ -1,8 +1,12 @@
 ﻿using RoboMan.Movement;
 using System;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("RoboManTest")]
 
 namespace RoboMan
 {
+   
+
     class Program
     {
         static void Main(string[] args)

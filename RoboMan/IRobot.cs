@@ -6,12 +6,10 @@ namespace RoboMan
     {
         MovementActionResult Move();
 
-        bool Left();
+        MovementActionResult Left();
 
-        bool Right();
-
-        //bool ChangeDirection(MovementType direction);
-
+        MovementActionResult Right();
+        
         MovementActionResult ReportStatus();
 
         MovementActionResult SetPositionOnBoard(int x, int y, FaceDirection facingDirection);

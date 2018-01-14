@@ -12,9 +12,9 @@ namespace RoboMan
         public Roboman(IBoardRules board)
         {
             _board = board;
-        } 
+        }
 
-        public bool Left()
+        public MovementActionResult Left()
         {
             return _board.ChangeDirection(MovementType.Left);
         }
@@ -23,13 +23,13 @@ namespace RoboMan
         {
             return _board.Move();
         }
-        
+
         public MovementActionResult SetPositionOnBoard(int placementX, int placementY, FaceDirection facingDirection)
         {
             return _board.SetPositionOnBoard(placementX, placementY, facingDirection);
         }
 
-        public bool Right()
+        public MovementActionResult Right()
         {
             return _board.ChangeDirection(MovementType.Right);
         }
@@ -39,7 +39,7 @@ namespace RoboMan
             return _board.ReportStatus();
         }
 
-        private bool ChangeDirection(MovementType movement)
+        private MovementActionResult ChangeDirection(MovementType movement)
         {
             return _board.ChangeDirection(movement);
         }

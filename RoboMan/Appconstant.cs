@@ -6,10 +6,9 @@ namespace RoboMan
 {
     class Appconstant
     {
-        public const int Size = 5;
+        public const int DefaultBoardSize = 5;
 
         public const char PlaceInstructionSeparator = ',';
-
 
         public const string AppExitCommandString = "exit";
     }

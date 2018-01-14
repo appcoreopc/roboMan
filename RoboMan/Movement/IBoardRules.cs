@@ -9,7 +9,7 @@ namespace RoboMan.Movement
 
         MovementActionResult Right();
 
-        bool ChangeDirection(MovementType direction);
+        MovementActionResult ChangeDirection(MovementType direction);
 
         MovementActionResult ReportStatus();
 

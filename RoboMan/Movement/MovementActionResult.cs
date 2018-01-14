@@ -58,6 +58,7 @@ namespace RoboMan.Movement
         ChangeDirectionOk, 
         ChangeDirectionFailed
         
+        
 
     }
 }
