@@ -106,9 +106,7 @@
 
         private int GetXMoved()
         {
-            //return _facingDirection == FaceDirection.West ? _locationX.Value - 1
-            //    : _facingDirection == FaceDirection.East ? _locationX.Value + 1 : _locationX.Value;
-
+         
             if (_facingDirection == FaceDirection.WEST)
                 return _locationX.Value - 1;
             else if (_facingDirection == FaceDirection.EAST)
@@ -126,8 +124,6 @@
             else
                 return _locationY.Value;
 
-            //return _facingDirection == FaceDirection.South ? _locationY.Value - 1
-            //    : _facingDirection == FaceDirection.North ? _locationY.Value + 1 : _locationY.Value;
         }
     }
 }

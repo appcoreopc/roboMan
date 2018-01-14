@@ -48,6 +48,10 @@ namespace RoboMan
         public const string ChangeDirectionFailed = "Change direction failed.";
 
         public const string ChangeDirectionOk = "Change direction ok.";
+
+        public const string ContainerSetupBoardArgumentTableSize = "tableSize";
+
+
     }
 
 }

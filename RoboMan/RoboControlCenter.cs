@@ -9,12 +9,12 @@ namespace RoboMan
     /// <summary>
     ///  Implementatioin of Command pattern 
     /// </summary>
-    class RoboCommand
+    class RoboControlCenter : IControlCenter
     {
         private IRobot _robo;
         private ICommandResult _commandResult;
 
-        public RoboCommand(IRobot robo, ICommandResult commandResult)
+        public RoboControlCenter(IRobot robo, ICommandResult commandResult)
         {
             _robo = robo;
             _commandResult = commandResult;
