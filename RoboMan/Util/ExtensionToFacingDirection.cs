@@ -1,14 +1,17 @@
 ﻿using System;
-
+ 
 namespace RoboMan.Util
 {
     public static class ExtensionToFacingDirection
     {
         public static FaceDirection? ToDirection(this string directionText)
         {
-            if (Enum.TryParse(directionText, out FaceDirection a))
+            if (string.IsNullOrWhiteSpace(directionText))
+                return null;
+
+            if (Enum.TryParse(directionText.ToUpper(), out FaceDirection intendedFacingDirection))
             {
-                return a;
+                return intendedFacingDirection;
             }
             return null;
         }

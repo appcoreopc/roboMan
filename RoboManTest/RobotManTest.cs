@@ -21,7 +21,7 @@ namespace RoboManTest
         [TestMethod]
         public void PlaceRobotWithinBoardTest()
         {
-            var result = _roboman.SetPositionOnBoard(0, 0, FaceDirection.North);
+            var result = _roboman.SetPositionOnBoard(0, 0, FaceDirection.NORTH);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Status == MovementStatus.RobotPlacementSuccessful);
@@ -30,7 +30,7 @@ namespace RoboManTest
         [TestMethod]
         public void PlaceRobotOutOfBoardSizeTest()
         {
-            var result = _roboman.SetPositionOnBoard(10, 10, FaceDirection.North);
+            var result = _roboman.SetPositionOnBoard(10, 10, FaceDirection.NORTH);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Status == MovementStatus.MoveXOutOfBoardMaxSize || result.Status == MovementStatus.MoveYOutOfBoardMaxSize);
         }
@@ -38,7 +38,7 @@ namespace RoboManTest
         [TestMethod]
         public void MoveWithinYAxiValidTest()
         {
-            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.North);
+            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.NORTH);
             var validMovement = _roboman.Move();
             Assert.IsTrue(validMovement.Status == MovementStatus.MoveOk);
 
@@ -47,7 +47,7 @@ namespace RoboManTest
         [TestMethod]
         public void MoveOutsideYAxiTest()
         {
-            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.North);
+            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.NORTH);
 
             _roboman.Move();
 
@@ -60,19 +60,19 @@ namespace RoboManTest
         [TestMethod]
         public void LeftTurnDirectionValidTest()
         {
-            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.North);
+            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.NORTH);
 
             _roboman.Left();
 
             var currentDirection = _roboman.ReportStatus();
 
-            Assert.IsTrue(currentDirection.Direction == FaceDirection.West);
+            Assert.IsTrue(currentDirection.Direction == FaceDirection.WEST);
         }
 
         [TestMethod]
         public void LeftTurnSouthValidTest()
         {
-            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.North);
+            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.NORTH);
 
             _roboman.Left();
 
@@ -80,7 +80,7 @@ namespace RoboManTest
 
             var currentDirection = _roboman.ReportStatus();
 
-            Assert.IsTrue(currentDirection.Direction == FaceDirection.South);
+            Assert.IsTrue(currentDirection.Direction == FaceDirection.SOUTH);
         }
 
 
@@ -88,20 +88,20 @@ namespace RoboManTest
         [TestMethod]
         public void RightTurnDirectionValidTest()
         {
-            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.North);
+            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.NORTH);
 
             _roboman.Right();
 
             var currentDirection = _roboman.ReportStatus();
 
-            Assert.IsTrue(currentDirection.Direction == FaceDirection.East);
+            Assert.IsTrue(currentDirection.Direction == FaceDirection.EAST);
         }
 
 
         [TestMethod]
         public void ThreeSixtyTurnDirectionValidTest()
         {
-            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.North);
+            var result = _roboman.SetPositionOnBoard(0, 3, FaceDirection.NORTH);
 
             _roboman.Right();
             _roboman.Right();
@@ -110,13 +110,13 @@ namespace RoboManTest
 
             var currentDirection = _roboman.ReportStatus();
 
-            Assert.IsTrue(currentDirection.Direction == FaceDirection.North);
+            Assert.IsTrue(currentDirection.Direction == FaceDirection.NORTH);
         }
 
         [TestMethod]
         public void XAxisMovementTest()
         {
-            var result = _roboman.SetPositionOnBoard(3, 0, FaceDirection.East);
+            var result = _roboman.SetPositionOnBoard(3, 0, FaceDirection.EAST);
             
             var validMovementResult = _roboman.Move();
 
@@ -132,7 +132,7 @@ namespace RoboManTest
         [TestMethod]
         public void XAxisMovementToWestDirectionOutOfArea()
         {
-            var result = _roboman.SetPositionOnBoard(3, 1, FaceDirection.East);
+            var result = _roboman.SetPositionOnBoard(3, 1, FaceDirection.EAST);
 
             _roboman.Right();
 
@@ -140,7 +140,7 @@ namespace RoboManTest
 
             var testDirectionResult = _roboman.ReportStatus();
             
-            Assert.IsTrue(testDirectionResult.Direction == FaceDirection.West);
+            Assert.IsTrue(testDirectionResult.Direction == FaceDirection.WEST);
 
             _roboman.Move();
 

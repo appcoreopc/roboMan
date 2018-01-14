@@ -7,8 +7,7 @@ namespace RoboMan.Command
 {
     interface ICommandResult
     {
-
-        void GetResult(MovementActionResult actionResult);
+        void ProcessResult(MovementActionResult actionResult);
     }
 
 }

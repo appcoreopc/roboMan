@@ -5,7 +5,10 @@ namespace RoboMan.Util
     {
         public static int? ToInt(this string locationText)
         {
-            if (int.TryParse(locationText, out int location))
+            if (string.IsNullOrWhiteSpace(locationText))
+                return null;
+
+            if (int.TryParse(locationText?.Trim(), out int location))
             {
                 return location;
             }

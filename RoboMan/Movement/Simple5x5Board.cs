@@ -42,10 +42,10 @@
                 currentRobotFacingDirection += 1 * (movement == MovementType.Right ? 1 : -1);
 
                 if (currentRobotFacingDirection == 5)
-                    currentRobotFacingDirection = (int)FaceDirection.North;
+                    currentRobotFacingDirection = (int)FaceDirection.NORTH;
 
                 if (currentRobotFacingDirection == 0)
-                    currentRobotFacingDirection = (int)FaceDirection.West;
+                    currentRobotFacingDirection = (int)FaceDirection.WEST;
 
                 _facingDirection = (FaceDirection) currentRobotFacingDirection;
 
@@ -106,9 +106,9 @@
             //return _facingDirection == FaceDirection.West ? _locationX.Value - 1
             //    : _facingDirection == FaceDirection.East ? _locationX.Value + 1 : _locationX.Value;
 
-            if (_facingDirection == FaceDirection.West)
+            if (_facingDirection == FaceDirection.WEST)
                 return _locationX.Value - 1;
-            else if (_facingDirection == FaceDirection.East)
+            else if (_facingDirection == FaceDirection.EAST)
                 return _locationX.Value + 1;
             else
                 return _locationX.Value;
@@ -116,9 +116,9 @@
 
         private int GetYMoved()
         {
-            if (_facingDirection == FaceDirection.South)
+            if (_facingDirection == FaceDirection.SOUTH)
                 return _locationY.Value - 1;
-            else if (_facingDirection == FaceDirection.North)
+            else if (_facingDirection == FaceDirection.NORTH)
                 return _locationY.Value + 1;
             else
                 return _locationY.Value;

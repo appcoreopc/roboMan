@@ -4,7 +4,7 @@ namespace RoboMan.Command
 {
     class ConsoleCommandResult : ICommandResult
     {
-        public void GetResult(MovementActionResult actionResult)
+        public void ProcessResult(MovementActionResult actionResult)
         {
             switch (actionResult.Status)
             {

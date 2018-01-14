@@ -82,7 +82,7 @@ namespace RoboMan
 
                     errs => 1);
 
-            _commandResult.GetResult(actionResult as MovementActionResult);
+            _commandResult.ProcessResult(actionResult as MovementActionResult);
         }
 
         private object PlaceRobot(PlaceOptions opts)
@@ -107,7 +107,7 @@ namespace RoboMan
                     {
                         LocationX = result[0].ToInt() ?? 0,
                         LocationY = result[1].ToInt() ?? 0,
-                        Direction = result[2].ToDirection() ?? FaceDirection.North
+                        Direction = result[2].ToDirection() ?? FaceDirection.NORTH
                     };
                 }
             }
