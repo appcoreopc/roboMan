@@ -30,8 +30,11 @@
                     _locationY = yNewPosition;
                     return new MovementActionResult(MovementStatus.MoveOk);
                 }
+                else
+                    return new MovementActionResult(MovementStatus.UnableToMoveToTargetLocation);
+
             }
-            return new MovementActionResult(MovementStatus.UnableToMoveToTargetLocation);
+            return new MovementActionResult(MovementStatus.RobotNotPlacedOnBoard);
         }
 
         public MovementActionResult ChangeDirection(MovementType movement)
@@ -47,9 +50,9 @@
                 if (currentRobotFacingDirection == 0)
                     currentRobotFacingDirection = (int)FaceDirection.WEST;
 
-                _facingDirection = (FaceDirection) currentRobotFacingDirection;
+                _facingDirection = (FaceDirection)currentRobotFacingDirection;
 
-                return movement == MovementType.Left ? new MovementActionResult(MovementStatus.LeftTurnOk) : 
+                return movement == MovementType.Left ? new MovementActionResult(MovementStatus.LeftTurnOk) :
                     new MovementActionResult(MovementStatus.RightTurnOk);
             }
             return new MovementActionResult(MovementStatus.ChangeDirectionFailed);
@@ -88,7 +91,7 @@
                 return new MovementActionResult(_locationX, _locationY,
                     _facingDirection, MovementStatus.RobotPlacementSuccessful);
             }
-            return new MovementActionResult(MovementStatus.RobotNotPlaced);
+            return new MovementActionResult(MovementStatus.RobotNotPlacedOnBoard);
         }
 
         private bool IsLocationWithinBoard(int x, int y)

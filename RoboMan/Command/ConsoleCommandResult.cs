@@ -6,9 +6,13 @@ namespace RoboMan.Command
     {
         public void ProcessResult(MovementActionResult actionResult)
         {
+
+            if (actionResult == null)
+                return;
+
             switch (actionResult.Status)
             {
-                case MovementStatus.RobotNotPlaced:
+                case MovementStatus.RobotNotPlacedOnBoard:
                     System.Console.WriteLine(Appconstant.RobotNotPlaced);
                     break;
                 case MovementStatus.RobotPlacementSuccessful:
@@ -54,6 +58,9 @@ namespace RoboMan.Command
                 case MovementStatus.ChangeDirectionOk:
                     break;
                 case MovementStatus.ChangeDirectionFailed:
+                    break;
+                case MovementStatus.InvalidInstructionGiven:
+                    System.Console.WriteLine(Appconstant.InvalidInstructionGiven);
                     break;
                 default:
                     break;

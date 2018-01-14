@@ -6,21 +6,20 @@ using System.Runtime.CompilerServices;
 
 namespace RoboMan
 {
-   
-
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welome to Robo World !");
+            Console.WriteLine(Appconstant.WelcomeString);
 
-            var robot = new Roboman(new Simple5x5Board(5));
+            var robot = new Roboman(new Simple5x5Board(Appconstant.DefaultBoardSize));
             var command = new RoboCommand(robot, new ConsoleCommandResult());
 
             while (true)
             {
-                var instructions = GetUserInstruction();
-                if (instructions?.ToLower() != Appconstant.AppExitCommandString)
+                var instructions = GetUserInstruction().ToLower();     
+                
+                if (instructions != Appconstant.AppExitCommandString)
                 {
                     command.ExecuteCommand(instructions.Split());
                 }
@@ -29,7 +28,7 @@ namespace RoboMan
 
         private static string GetUserInstruction()
         {
-            Console.Write("#:");
+            Console.Write(Appconstant.CommandPrompt);
             return Console.ReadLine();
         }
     }

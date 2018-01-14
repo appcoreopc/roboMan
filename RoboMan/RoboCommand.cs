@@ -65,24 +65,35 @@ namespace RoboMan
 
         public void ExecuteCommand(string[] command)
         {
-            var actionResult = CommandLine.Parser.Default.ParseArguments<PlaceOptions, MoveOptions, 
-                LeftOptions, RightOptions, ReportOptions>(command)
-           
-                .MapResult(
+            MovementActionResult executionResult;
 
-                    (PlaceOptions opts) => PlaceRobot(opts),
+            if (command == null)
+                executionResult = new MovementActionResult(MovementStatus.RobotPlaceInvalidCommandParsed);
+            else
+            {
 
-                    (MoveOptions opts) => Move(opts),
+                var actionResult = CommandLine.Parser.Default.ParseArguments<PlaceOptions, MoveOptions,
+                    LeftOptions, RightOptions, ReportOptions>(command)
 
-                    (LeftOptions opts) => TurnLeft(opts),
+                    .MapResult(
 
-                    (RightOptions opts) => TurnRight(opts),
+                        (PlaceOptions opts) => PlaceRobot(opts),
 
-                    (ReportOptions opts) => ReportStatus(opts),
+                        (MoveOptions opts) => Move(opts),
 
-                    errs => 1);
+                        (LeftOptions opts) => TurnLeft(opts),
 
-            _commandResult.ProcessResult(actionResult as MovementActionResult);
+                        (RightOptions opts) => TurnRight(opts),
+
+                        (ReportOptions opts) => ReportStatus(opts),
+
+                        errs => 1);
+
+                executionResult = actionResult as MovementActionResult;
+
+            }
+
+            _commandResult.ProcessResult(executionResult);
         }
 
         private object PlaceRobot(PlaceOptions opts)
@@ -95,6 +106,9 @@ namespace RoboMan
             }
             return new MovementActionResult(MovementStatus.RobotPlaceInvalidCommandParsed);
         }
+
+
+
 
         private ParsedPositionInstruction GetPlacementDirection(string placementCommandArgument)
         {
