@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using RoboMan.Command;
 using RoboMan.Movement;
 using RoboMan.Parser;
 using RoboMan.Util;
@@ -54,15 +55,16 @@ namespace RoboMan
     class RoboCommand
     {
         private IRobot _robo;
+        private ICommandResult _commandResult;
 
-        public RoboCommand(IRobot robo)
+        public RoboCommand(IRobot robo, ICommandResult commandResult)
         {
             _robo = robo;
+            _commandResult = commandResult;
         }
 
         public void ExecuteCommand(string[] command)
         {
-
             var actionResult = CommandLine.Parser.Default.ParseArguments<PlaceOptions, MoveOptions, 
                 LeftOptions, RightOptions, ReportOptions>(command)
            
@@ -79,6 +81,8 @@ namespace RoboMan
                     (ReportOptions opts) => ReportStatus(opts),
 
                     errs => 1);
+
+            _commandResult.GetResult(actionResult as MovementActionResult);
         }
 
         private object PlaceRobot(PlaceOptions opts)
@@ -112,8 +116,7 @@ namespace RoboMan
 
         private object ReportStatus(ReportOptions opts)
         {
-            var statusReport = _robo.ReportStatus();
-            return statusReport; 
+            return _robo.ReportStatus();
         }
 
         private object TurnRight(RightOptions opts)
