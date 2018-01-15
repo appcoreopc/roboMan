@@ -7,7 +7,7 @@ using RoboMan.Movement;
 namespace RoboManTest
 {
     [TestClass]
-    public class ControlCenterTest
+    public class ControlCenterTest 
     {
         private ICommandResult _commandResult;
         private IRobot _roboman;
@@ -47,7 +47,7 @@ namespace RoboManTest
         [TestMethod]
         public void InvalidCommandTest()
         {
-            string[] commandStringInput = { "MOOVE" };
+            string[] commandStringInput = { AppTestConstants.InvalidMoveCommandString };
 
             _controlCenter.ExecuteCommand(commandStringInput);
 
@@ -71,7 +71,7 @@ namespace RoboManTest
         [TestMethod]
         public void ExecuteMoveCommandSuccessfulTest()
         {
-            string[] commandStringInput = { "move" };
+            string[] commandStringInput = { AppTestConstants.MoveCommandString };
 
             var expectedActionResult = new MovementActionResult(MovementStatus.MoveOk);
 
@@ -99,7 +99,7 @@ namespace RoboManTest
         [TestMethod]
         public void ExecuteLeftCommandSuccessfulTest()
         {
-            string[] commandStringInput = { "left" };
+            string[] commandStringInput = { AppTestConstants.LeftCommandString };
 
             var expectedActionResult = new MovementActionResult(MovementStatus.TurnLeftSuccessful);
 
@@ -128,7 +128,7 @@ namespace RoboManTest
         {
             var subject = new RoboControlCenter(_roboman, _commandResult);
 
-            string[] commandStringInput = { "right" };
+            string[] commandStringInput = { AppTestConstants.RightCommandString };
 
             var expectedActionResult = new MovementActionResult(MovementStatus.TurnRightSuccessful);
 
@@ -156,7 +156,7 @@ namespace RoboManTest
         {
             var subject = new RoboControlCenter(_roboman, _commandResult);
 
-            string[] commandStringInput = { "place", "1,1,north" };
+            string[] commandStringInput = { AppTestConstants.PlaceCommandString, AppTestConstants.ValidPlaceCommandStringArgument };
 
             var expectedActionResult = new MovementActionResult(MovementStatus.RobotPlacementSuccessful);
 
@@ -189,7 +189,7 @@ namespace RoboManTest
         {
             var subject = new RoboControlCenter(_roboman, _commandResult);
 
-            string[] commandStringInput = { "place", "1,1,DOWNTOWN" };          
+            string[] commandStringInput = { AppTestConstants.PlaceCommandString, AppTestConstants.NotValidPlaceCommandStringArgument };          
                                                
             _controlCenter.ExecuteCommand(commandStringInput);
 
