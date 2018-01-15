@@ -14,11 +14,11 @@ In order to play it, you have to type a series of command starting with place co
 
 List of valid commands are :
 
--PLACE x,y,direction
--MOVE
--LEFT
--RIGHT
--REPORT
+*PLACE x,y,direction
+*MOVE
+*LEFT
+*RIGHT
+*REPORT
 
 Have fun!
 
