@@ -1,9 +1,9 @@
 ﻿
 namespace RoboMan.Util
 {
-    public static class ExtensionToInt
+    static class ExtensionToInt
     {
-        public static int? ToInt(this string locationText)
+        internal static int? ToInt(this string locationText)
         {
             if (string.IsNullOrWhiteSpace(locationText))
                 return null;

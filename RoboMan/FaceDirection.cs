@@ -1,7 +1,7 @@
 ﻿
 namespace RoboMan
 {
-    public enum FaceDirection
+    enum FaceDirection
     {
         NORTH = 1, 
         EAST = 2, 

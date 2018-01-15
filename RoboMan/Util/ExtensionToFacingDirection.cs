@@ -2,9 +2,9 @@
  
 namespace RoboMan.Util
 {
-    public static class ExtensionToFacingDirection
+    static class ExtensionToFacingDirection
     {
-        public static FaceDirection? ToDirection(this string directionText)
+        internal static FaceDirection? ToDirection(this string directionText)
         {
             if (string.IsNullOrWhiteSpace(directionText))
                 return null;
