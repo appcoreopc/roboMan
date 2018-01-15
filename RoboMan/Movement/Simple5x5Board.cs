@@ -89,9 +89,9 @@
             if (IsRobotPlacedOnTheBoard())
             {
                 return new MovementActionResult(_locationX, _locationY,
-                    _facingDirection, MovementStatus.RobotPlacementSuccessful);
+                    _facingDirection, MovementStatus.ReportStatusOk);
             }
-            return new MovementActionResult(MovementStatus.RobotNotPlacedOnBoard);
+            return new MovementActionResult(MovementStatus.ReportStatusFailed);
         }
 
         private bool IsLocationWithinBoard(int x, int y)

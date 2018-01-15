@@ -69,6 +69,12 @@ namespace RoboMan.Command
                 case MovementStatus.InvalidInstructionGiven:
                     System.Console.WriteLine(Appconstant.InvalidInstructionGiven);
                     break;
+                case MovementStatus.ReportStatusOk:
+                    System.Console.WriteLine($"Location X:{actionResult.LocationX} " +
+                        $"Y:{actionResult.LocationY} " +
+                        $"Direction:{actionResult.Direction}");
+                    break;
+
                 default:
                     break;
             }

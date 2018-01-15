@@ -123,6 +123,34 @@ namespace RoboManTest
 
         }
 
+
+        [TestMethod]
+        public void ExecuteReportCommandSuccessfulTest()
+        {
+            string[] commandStringInput = { AppTestConstants.ReportCommandString};
+
+            var expectedActionResult = new MovementActionResult(MovementStatus.ReportStatusOk);
+
+            _roboman.ReportStatus().Returns(expectedActionResult);
+
+            _controlCenter.ExecuteCommand(commandStringInput);
+
+            // Assert IRobot 
+
+            _roboman.DidNotReceive().Move();
+
+            _roboman.DidNotReceive().Left();
+
+            _roboman.DidNotReceive().Right();
+
+            _roboman.Received().ReportStatus();
+
+            // Assert ICommandResult was called with the proper actionResult
+
+            _commandResult.Received().ProcessResult(Arg.Is<MovementActionResult>(x => x.Status == MovementStatus.ReportStatusOk));
+
+        }
+
         [TestMethod]
         public void ExecuteRightCommandSuccessfulTest()
         {

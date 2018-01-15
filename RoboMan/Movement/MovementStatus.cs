@@ -28,6 +28,9 @@ namespace RoboMan.Movement
         ChangeDirectionOk,
         ChangeDirectionFailed,
 
-        InvalidInstructionGiven
+        InvalidInstructionGiven, 
+
+        ReportStatusOk, 
+        ReportStatusFailed
     }
 }

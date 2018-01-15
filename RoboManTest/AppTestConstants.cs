@@ -16,6 +16,8 @@ namespace RoboManTest
 
         public const string PlaceCommandString = "place";
 
+        public const string ReportCommandString = "report";
+        
         public const string ValidPlaceCommandStringArgument = "1,1,north";
 
         public const string NotValidPlaceCommandStringArgument = "1,1, DOWNTOWN";
