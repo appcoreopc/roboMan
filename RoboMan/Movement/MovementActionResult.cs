@@ -26,39 +26,5 @@ namespace RoboMan.Movement
         public MovementStatus Status { get; set; }
     }
 
-    enum MovementStatus
-    {
-        RobotNotPlaced, 
-        RobotPlacementSuccessful,
-        RobotPlamentOutOfBoardSize,
-        RobotPlaceInvalidCommandParsed,
-
-        TurnLeftSuccessful,
-        TurnLeftUnable,
-
-        TurnRightSuccessful,
-        TurnRightFail,
-
-        MoveOk,
-        MoveXOutOfBoardMaxSize,
-        MoveXOutOfBoardMinSize,
-        UnableToMoveToTargetLocation,
-
-        MoveYOutOfBoardMaxSize,
-        MoveYOutOfBoardMinSize,
-
-        MoveCannotBeDetermined, 
-
-        LeftTurnOk, 
-        LeftTurnFail, 
-
-        RightTurnOk, 
-        RightTurnFail, 
-
-        ChangeDirectionOk, 
-        ChangeDirectionFailed
-        
-        
-
-    }
+    
 }

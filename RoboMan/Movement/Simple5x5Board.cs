@@ -30,8 +30,11 @@
                     _locationY = yNewPosition;
                     return new MovementActionResult(MovementStatus.MoveOk);
                 }
+                else
+                    return new MovementActionResult(MovementStatus.UnableToMoveToTargetLocation);
+
             }
-            return new MovementActionResult(MovementStatus.UnableToMoveToTargetLocation);
+            return new MovementActionResult(MovementStatus.RobotNotPlacedOnBoard);
         }
 
         public MovementActionResult ChangeDirection(MovementType movement)
@@ -42,15 +45,15 @@
                 currentRobotFacingDirection += 1 * (movement == MovementType.Right ? 1 : -1);
 
                 if (currentRobotFacingDirection == 5)
-                    currentRobotFacingDirection = (int)FaceDirection.North;
+                    currentRobotFacingDirection = (int)FaceDirection.NORTH;
 
                 if (currentRobotFacingDirection == 0)
-                    currentRobotFacingDirection = (int)FaceDirection.West;
+                    currentRobotFacingDirection = (int)FaceDirection.WEST;
 
-                _facingDirection = (FaceDirection) currentRobotFacingDirection;
+                _facingDirection = (FaceDirection)currentRobotFacingDirection;
 
-                return movement == MovementType.Left ? new MovementActionResult(MovementStatus.LeftTurnOk) : 
-                    new MovementActionResult(MovementStatus.RightTurnOk);
+                return movement == MovementType.Left ? new MovementActionResult(MovementStatus.TurnLeftSuccessful) :
+                    new MovementActionResult(MovementStatus.TurnRightSuccessful);
             }
             return new MovementActionResult(MovementStatus.ChangeDirectionFailed);
         }
@@ -88,7 +91,7 @@
                 return new MovementActionResult(_locationX, _locationY,
                     _facingDirection, MovementStatus.RobotPlacementSuccessful);
             }
-            return new MovementActionResult(MovementStatus.RobotNotPlaced);
+            return new MovementActionResult(MovementStatus.RobotNotPlacedOnBoard);
         }
 
         private bool IsLocationWithinBoard(int x, int y)
@@ -103,12 +106,10 @@
 
         private int GetXMoved()
         {
-            //return _facingDirection == FaceDirection.West ? _locationX.Value - 1
-            //    : _facingDirection == FaceDirection.East ? _locationX.Value + 1 : _locationX.Value;
-
-            if (_facingDirection == FaceDirection.West)
+         
+            if (_facingDirection == FaceDirection.WEST)
                 return _locationX.Value - 1;
-            else if (_facingDirection == FaceDirection.East)
+            else if (_facingDirection == FaceDirection.EAST)
                 return _locationX.Value + 1;
             else
                 return _locationX.Value;
@@ -116,15 +117,13 @@
 
         private int GetYMoved()
         {
-            if (_facingDirection == FaceDirection.South)
+            if (_facingDirection == FaceDirection.SOUTH)
                 return _locationY.Value - 1;
-            else if (_facingDirection == FaceDirection.North)
+            else if (_facingDirection == FaceDirection.NORTH)
                 return _locationY.Value + 1;
             else
                 return _locationY.Value;
 
-            //return _facingDirection == FaceDirection.South ? _locationY.Value - 1
-            //    : _facingDirection == FaceDirection.North ? _locationY.Value + 1 : _locationY.Value;
         }
     }
 }

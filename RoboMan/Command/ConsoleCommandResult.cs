@@ -4,11 +4,18 @@ namespace RoboMan.Command
 {
     class ConsoleCommandResult : ICommandResult
     {
-        public void GetResult(MovementActionResult actionResult)
+        public void ProcessResult(MovementActionResult actionResult)
         {
+
+            if (actionResult == null)
+            {
+                System.Console.WriteLine(Appconstant.InvalidInstructionGiven);
+                return;
+            }
+            
             switch (actionResult.Status)
             {
-                case MovementStatus.RobotNotPlaced:
+                case MovementStatus.RobotNotPlacedOnBoard:
                     System.Console.WriteLine(Appconstant.RobotNotPlaced);
                     break;
                 case MovementStatus.RobotPlacementSuccessful:
@@ -52,23 +59,15 @@ namespace RoboMan.Command
                     break;
                 case MovementStatus.MoveCannotBeDetermined:
                     System.Console.WriteLine(Appconstant.MoveCannotBeDetermined);
-                    break;
-                case MovementStatus.LeftTurnOk:
-                    break;
-                case MovementStatus.LeftTurnFail:
-                    System.Console.WriteLine(Appconstant.LeftTurnFail);
-                    break;
-                case MovementStatus.RightTurnOk:
-                    System.Console.WriteLine(Appconstant.RightTurnOk);
-                    break;
-                case MovementStatus.RightTurnFail:
-                    System.Console.WriteLine(Appconstant.RightTurnFail);
-                    break;
+                    break;              
                 case MovementStatus.ChangeDirectionOk:
                     System.Console.WriteLine(Appconstant.ChangeDirectionOk);
                     break;
                 case MovementStatus.ChangeDirectionFailed:
                     System.Console.WriteLine(Appconstant.ChangeDirectionFailed);
+                    break;
+                case MovementStatus.InvalidInstructionGiven:
+                    System.Console.WriteLine(Appconstant.InvalidInstructionGiven);
                     break;
                 default:
                     break;

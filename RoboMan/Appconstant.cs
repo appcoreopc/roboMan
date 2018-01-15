@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace RoboMan
 {
     class Appconstant
@@ -12,7 +9,7 @@ namespace RoboMan
 
         public const string AppExitCommandString = "exit";
         
-        public const string RobotNotPlaced = "Robot is not place on the board. Please call place x,y,direction first";
+        public const string RobotNotPlaced = "Robot is not place on the board. Please call place x,y,direction before moving robot";
 
         public const string RobotPlacementSuccessful = "Robot is placed on board.";
         
@@ -22,36 +19,39 @@ namespace RoboMan
 
         public const string TurnLeftSuccessful = "Turn left ok.";
 
-        public const string TurnLeftUnable = "Unable Turn left.";
+        public const string WelcomeString = "Welcome to Roboman!";
+        
+        public const string InvalidInstructionGiven = "Invalid Instruction Given.";
 
-        public const string TurnRightSuccessful = "Turn right ok";
+        public const string CommandPrompt = ">:";
+                
+        public const string TurnLeftUnable = "Unable to turn left.";
+        
+        public const string TurnRightSuccessful = "Turn right ok.";
 
-        public const string TurnRightFail = "Unable Turn right.";
+        public const string TurnRightFail = "Turn right failed.";
+        
+        public const string MoveOk = "Move ok";
 
-        public const string MoveOk = "Move Ok";
+        public const string MoveXOutOfBoardMaxSize = "Robot reached x-axis max size.";
 
-        public const string MoveXOutOfBoardMaxSize = "Moving on x-axis out of board.";
+        public const string MoveXOutOfBoardMinSize = "Robt reach x-axis min size.";
 
-        public const string LeftTurnFail = "Turn left failed.";
+        public const string UnableToMoveToTargetLocation = "Unable to move to the target location.";
 
-        public const string RightTurnOk = "Right turn ok.";
+        public const string MoveYOutOfBoardMaxSize = "Robot reach y-axis max size.";
 
-        public const string RightTurnFail = "Right turn failed";
+        public const string MoveYOutOfBoardMinSize = "Robot reach y-axis min size.";
 
-        public const string ChangeDirectionOk = "Change direction ok";
+        public const string MoveCannotBeDetermined  = "Unable to determine move";
 
         public const string ChangeDirectionFailed = "Change direction failed.";
 
-        public const string MoveXOutOfBoardMinSize = "Move x-axis is negative";
+        public const string ChangeDirectionOk = "Change direction ok.";
 
-        public const string UnableToMoveToTargetLocation = "Unable to move out of board";
+        public const string ContainerSetupBoardArgumentTableSize = "tableSize";
 
-        public const string MoveYOutOfBoardMaxSize = "Moving y-axis out of board size.";
 
-        public const string MoveYOutOfBoardMinSize = "Move y-axis is negative.";
-
-        public const string MoveCannotBeDetermined = "Move cannot be determined.";
     }
-
 
 }
