@@ -51,6 +51,8 @@ namespace RoboMan
 
         public const string ContainerSetupBoardArgumentTableSize = "tableSize";
 
+        public const string ReportStatusFailed = "Report status failed.";
+
 
     }
 

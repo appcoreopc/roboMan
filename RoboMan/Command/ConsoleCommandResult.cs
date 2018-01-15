@@ -6,7 +6,6 @@ namespace RoboMan.Command
     {
         public void ProcessResult(MovementActionResult actionResult)
         {
-
             if (actionResult == null)
             {
                 System.Console.WriteLine(Appconstant.InvalidInstructionGiven);
@@ -74,7 +73,9 @@ namespace RoboMan.Command
                         $"Y:{actionResult.LocationY} " +
                         $"Direction:{actionResult.Direction}");
                     break;
-
+                case MovementStatus.ReportStatusFailed:
+                    System.Console.WriteLine(Appconstant.ReportStatusFailed);
+                    break;
                 default:
                     break;
             }
