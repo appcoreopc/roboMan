@@ -1,6 +1,4 @@
-﻿using RoboMan.Command;
-using RoboMan.Movement;
-using StructureMap;
+﻿using RoboMan.Util;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -14,23 +12,10 @@ namespace RoboMan
         static void Main(string[] args)
         {
             Console.WriteLine(Appconstant.WelcomeString);
-            
-            var container = new Container(_ =>
-            {               
-                var boardSetup = _.For<IBoardRules>().Use<Simple5x5Board>().
-                Ctor<int>(Appconstant.ContainerSetupBoardArgumentTableSize).Is(Appconstant.DefaultBoardSize);
 
-                var commandResult = _.For<ICommandResult>().Use<ConsoleCommandResult>();
+            var componentContainer = AppFac.Setup();
 
-                var roboCharacter = _.For<IRobot>().Use<Roboman>().Ctor<IBoardRules>().Is(boardSetup);
-
-                var commandCenter = _.For<IControlCenter>().Use<RoboControlCenter>().
-                Ctor<IRobot>().Is(roboCharacter).Ctor<ICommandResult>().Is(commandResult);
-                
-            });
-
-
-            var controlCenter = container.GetInstance<IControlCenter>();
+            var controlCenter = componentContainer.GetInstance<IControlCenter>();
           
             while (true)
             {
