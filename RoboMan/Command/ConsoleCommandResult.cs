@@ -69,9 +69,16 @@ namespace RoboMan.Command
                     System.Console.WriteLine(Appconstant.InvalidInstructionGiven);
                     break;
                 case MovementStatus.ReportStatusOk:
-                    System.Console.WriteLine($"Location X:{actionResult.LocationX} " +
+                    if (actionResult.LocationX.HasValue && actionResult.LocationY.HasValue)
+                    {
+                        System.Console.WriteLine($"Location X:{actionResult.LocationX} " +
                         $"Y:{actionResult.LocationY} " +
                         $"Direction:{actionResult.Direction}");
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Robot in steath mode.");
+                    }
                     break;
                 case MovementStatus.ReportStatusFailed:
                     System.Console.WriteLine(Appconstant.ReportStatusFailed);
