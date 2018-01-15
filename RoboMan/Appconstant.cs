@@ -52,7 +52,12 @@ namespace RoboMan
         public const string ContainerSetupBoardArgumentTableSize = "tableSize";
 
         public const string ReportStatusFailed = "Report status failed.";
+        
+        public const int LocationXIndex = 0;
 
+        public const int LocationYIndex = 1;
+
+        public const int DirectionIndex = 2;
 
     }
 

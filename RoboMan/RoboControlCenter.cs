@@ -71,9 +71,9 @@ namespace RoboMan
                 var locationInfo = placementCommandArgument?.Split(Appconstant.PlaceInstructionSeparator);
                 if (locationInfo.Length == 3)
                 {
-                    var xlocation = locationInfo[0].ToInt();
-                    var ylocation = locationInfo[1].ToInt();
-                    var direction = locationInfo[2].ToDirection();
+                    var xlocation = locationInfo[Appconstant.LocationXIndex].ToInt();
+                    var ylocation = locationInfo[Appconstant.LocationYIndex].ToInt();
+                    var direction = locationInfo[Appconstant.DirectionIndex].ToDirection();
                  
                     if (direction != null && xlocation != null && ylocation != null)
                     {
