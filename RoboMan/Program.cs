@@ -17,13 +17,15 @@ namespace RoboMan
             
             var container = new Container(_ =>
             {               
-                var boardSetup = _.For<IBoardRules>().Use<Simple5x5Board>().Ctor<int>(Appconstant.ContainerSetupBoardArgumentTableSize).Is(Appconstant.DefaultBoardSize);
+                var boardSetup = _.For<IBoardRules>().Use<Simple5x5Board>().
+                Ctor<int>(Appconstant.ContainerSetupBoardArgumentTableSize).Is(Appconstant.DefaultBoardSize);
 
                 var commandResult = _.For<ICommandResult>().Use<ConsoleCommandResult>();
 
                 var roboCharacter = _.For<IRobot>().Use<Roboman>().Ctor<IBoardRules>().Is(boardSetup);
 
-                var commandCenter = _.For<IControlCenter>().Use<RoboControlCenter>().Ctor<IRobot>().Is(roboCharacter).Ctor<ICommandResult>().Is(commandResult);
+                var commandCenter = _.For<IControlCenter>().Use<RoboControlCenter>().
+                Ctor<IRobot>().Is(roboCharacter).Ctor<ICommandResult>().Is(commandResult);
                 
             });
 

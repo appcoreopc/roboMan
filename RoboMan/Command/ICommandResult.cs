@@ -1,9 +1,6 @@
 ﻿using RoboMan.Movement;
 using System.Runtime.CompilerServices;
 
-
-
-
 namespace RoboMan.Command
 {
    

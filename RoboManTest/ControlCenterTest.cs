@@ -38,9 +38,7 @@ namespace RoboManTest
             _roboman.DidNotReceive().Right();
 
             _roboman.DidNotReceive().ReportStatus();
-
-            var expectedInvalidInstruction = new MovementActionResult(MovementStatus.InvalidInstructionGiven);
-
+                  
             _commandResult.Received().ProcessResult(Arg.Is<MovementActionResult>(x => x.Status == MovementStatus.InvalidInstructionGiven));
             
         }
