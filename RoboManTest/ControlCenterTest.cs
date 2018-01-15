@@ -21,9 +21,7 @@ namespace RoboManTest
             _roboman = Substitute.For<IRobot>();
 
             _controlCenter = new RoboControlCenter(_roboman, _commandResult);
-
         }
-
 
         [TestMethod]
         public void NullCommandTest()
@@ -164,7 +162,7 @@ namespace RoboManTest
 
             var expectedActionResult = new MovementActionResult(MovementStatus.RobotPlacementSuccessful);
 
-            _roboman.SetPositionOnBoard(10, 10, FaceDirection.EAST).ReturnsForAnyArgs(expectedActionResult);
+            _roboman.SetPositionOnBoard(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<FaceDirection>()).ReturnsForAnyArgs(expectedActionResult);
 
             _controlCenter.ExecuteCommand(commandStringInput);
 
@@ -186,6 +184,36 @@ namespace RoboManTest
 
             _commandResult.Received().ProcessResult(expectedActionResult);
             
+            
+        }
+
+        [TestMethod]
+        public void ExecuteInvalidPlaceCommandSuccessfulTest()
+        {
+            var subject = new RoboControlCenter(_roboman, _commandResult);
+
+            string[] commandStringInput = { "place", "1,1,DOWNTOWN" };          
+                                               
+            _controlCenter.ExecuteCommand(commandStringInput);
+
+            // Assert IRobot 
+
+            _roboman.DidNotReceive().Move();
+
+            _roboman.DidNotReceive().Left();
+
+            _roboman.DidNotReceive().Right();
+
+            _roboman.DidNotReceive().ReportStatus();
+
+            // Assert roboman is the same with given command string //
+
+            _roboman.DidNotReceive().SetPositionOnBoard(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<FaceDirection>());
+
+            // Assert ICommandResult was called with the proper actionResult
+
+            _commandResult.Received().ProcessResult(Arg.Is<MovementActionResult>(x => x.Status == MovementStatus.RobotPlaceInvalidCommandParsed));
+
         }
 
     }

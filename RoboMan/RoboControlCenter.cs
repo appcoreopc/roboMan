@@ -68,15 +68,22 @@ namespace RoboMan
         {
             if (!string.IsNullOrEmpty(placementCommandArgument))
             {
-                var result = placementCommandArgument?.Split(Appconstant.PlaceInstructionSeparator);
-                if (result.Length == 3)
+                var locationInfo = placementCommandArgument?.Split(Appconstant.PlaceInstructionSeparator);
+                if (locationInfo.Length == 3)
                 {
-                    return new ParsedPositionInstruction
+
+                    var direction = locationInfo[2].ToDirection();
+                    if (direction != null)
                     {
-                        LocationX = result[0].ToInt() ?? 0,
-                        LocationY = result[1].ToInt() ?? 0,
-                        Direction = result[2].ToDirection() ?? FaceDirection.NORTH
-                    };
+                        return new ParsedPositionInstruction
+                        {
+                            LocationX = locationInfo[0].ToInt() ?? 0,
+                            LocationY = locationInfo[1].ToInt() ?? 0,
+                            Direction = locationInfo[2].ToDirection() ?? FaceDirection.NORTH
+                        };
+                    }
+                    else
+                        return null;
                 }
             }
             return null;
