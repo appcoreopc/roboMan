@@ -3,7 +3,9 @@ using RoboMan.Movement;
 using StructureMap;
 using System;
 using System.Runtime.CompilerServices;
+
 [assembly: InternalsVisibleTo("RoboManTest")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace RoboMan
 {
@@ -23,15 +25,11 @@ namespace RoboMan
 
                 var commandCenter = _.For<IControlCenter>().Use<RoboControlCenter>().Ctor<IRobot>().Is(roboCharacter).Ctor<ICommandResult>().Is(commandResult);
                 
-
             });
 
 
             var controlCenter = container.GetInstance<IControlCenter>();
-           
-            //var robot = new Roboman(new Simple5x5Board(Appconstant.DefaultBoardSize));
-            //var command = new ControlCenter(robot, new ConsoleCommandResult());
-
+          
             while (true)
             {
                 var instructions = GetUserInstruction().ToLower();     

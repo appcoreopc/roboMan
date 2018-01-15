@@ -12,12 +12,12 @@ namespace RoboMan
     class RoboControlCenter : IControlCenter
     {
         private IRobot _robo;
-        private ICommandResult _commandResult;
+        private ICommandResult _commandResultHandler;
 
         public RoboControlCenter(IRobot robo, ICommandResult commandResult)
         {
             _robo = robo;
-            _commandResult = commandResult;
+            _commandResultHandler = commandResult;
         }
 
         public void ExecuteCommand(string[] command)
@@ -25,10 +25,9 @@ namespace RoboMan
             MovementActionResult executionResult;
 
             if (command == null)
-                executionResult = new MovementActionResult(MovementStatus.RobotPlaceInvalidCommandParsed);
+                executionResult = new MovementActionResult(MovementStatus.InvalidInstructionGiven);
             else
             {
-
                 var actionResult = CommandLine.Parser.Default.ParseArguments<PlaceOptions, MoveOptions,
                     LeftOptions, RightOptions, ReportOptions>(command)
 
@@ -44,13 +43,13 @@ namespace RoboMan
 
                         (ReportOptions opts) => ReportStatus(opts),
 
-                        errs => 1);
+                        errs => new MovementActionResult(MovementStatus.InvalidInstructionGiven));
 
                 executionResult = actionResult as MovementActionResult;
 
             }
 
-            _commandResult.ProcessResult(executionResult);
+            _commandResultHandler.ProcessResult(executionResult);
         }
 
         private object PlaceRobot(PlaceOptions opts)
@@ -63,6 +62,7 @@ namespace RoboMan
             }
             return new MovementActionResult(MovementStatus.RobotPlaceInvalidCommandParsed);
         }
+        
         
         private ParsedPositionInstruction GetPlacementDirection(string placementCommandArgument)
         {

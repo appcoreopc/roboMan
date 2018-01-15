@@ -1,10 +1,12 @@
 ﻿using RoboMan.Movement;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Runtime.CompilerServices;
+
+
+
 
 namespace RoboMan.Command
 {
+   
     interface ICommandResult
     {
         void ProcessResult(MovementActionResult actionResult);

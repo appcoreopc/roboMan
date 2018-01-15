@@ -1,6 +1,5 @@
 ﻿using CommandLine;
 
-
 namespace RoboMan.Command
 {
     [Verb("place", HelpText = "Place robot on a given board")]
