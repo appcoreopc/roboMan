@@ -183,8 +183,7 @@ namespace RoboManTest
             // Assert ICommandResult was called with the proper actionResult
 
             _commandResult.Received().ProcessResult(expectedActionResult);
-            
-            
+                        
         }
 
         [TestMethod]
@@ -216,6 +215,64 @@ namespace RoboManTest
 
         }
 
+
+        [TestMethod]
+        public void ExecuteInvalidPlaceXAxisCommandSuccessfulTest()
+        {
+            var subject = new RoboControlCenter(_roboman, _commandResult);
+
+            string[] commandStringInput = { "place", "A,1,DOWNTOWN" };
+
+            _controlCenter.ExecuteCommand(commandStringInput);
+
+            // Assert IRobot 
+
+            _roboman.DidNotReceive().Move();
+
+            _roboman.DidNotReceive().Left();
+
+            _roboman.DidNotReceive().Right();
+
+            _roboman.DidNotReceive().ReportStatus();
+
+            // Assert roboman is the same with given command string //
+
+            _roboman.DidNotReceive().SetPositionOnBoard(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<FaceDirection>());
+
+            // Assert ICommandResult was called with the proper actionResult
+
+            _commandResult.Received().ProcessResult(Arg.Is<MovementActionResult>(x => x.Status == MovementStatus.RobotPlaceInvalidCommandParsed));
+
+        }
+
+        [TestMethod]
+        public void ExecuteInvalidPlaceYAxisCommandSuccessfulTest()
+        {
+            var subject = new RoboControlCenter(_roboman, _commandResult);
+
+            string[] commandStringInput = { "place", "1,B,DOWNTOWN" };
+
+            _controlCenter.ExecuteCommand(commandStringInput);
+
+            // Assert IRobot 
+
+            _roboman.DidNotReceive().Move();
+
+            _roboman.DidNotReceive().Left();
+
+            _roboman.DidNotReceive().Right();
+
+            _roboman.DidNotReceive().ReportStatus();
+
+            // Assert roboman is the same with given command string //
+
+            _roboman.DidNotReceive().SetPositionOnBoard(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<FaceDirection>());
+
+            // Assert ICommandResult was called with the proper actionResult
+
+            _commandResult.Received().ProcessResult(Arg.Is<MovementActionResult>(x => x.Status == MovementStatus.RobotPlaceInvalidCommandParsed));
+
+        }
     }
 }
 

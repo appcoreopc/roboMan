@@ -71,15 +71,17 @@ namespace RoboMan
                 var locationInfo = placementCommandArgument?.Split(Appconstant.PlaceInstructionSeparator);
                 if (locationInfo.Length == 3)
                 {
-
+                    var xlocation = locationInfo[0].ToInt();
+                    var ylocation = locationInfo[1].ToInt();
                     var direction = locationInfo[2].ToDirection();
-                    if (direction != null)
+                 
+                    if (direction != null && xlocation != null && ylocation != null)
                     {
                         return new ParsedPositionInstruction
                         {
-                            LocationX = locationInfo[0].ToInt() ?? 0,
-                            LocationY = locationInfo[1].ToInt() ?? 0,
-                            Direction = locationInfo[2].ToDirection() ?? FaceDirection.NORTH
+                            LocationX = xlocation.Value,
+                            LocationY = ylocation.Value,
+                            Direction = direction.Value
                         };
                     }
                     else
